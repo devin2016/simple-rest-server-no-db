@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title>JavaScript Test Page</title>
+	</head>
+<body>
+<h1>JavaScript Console</h1>
+<script>
+// Define a function max() that takes two numbers as arguments and returns the largest of them. 
+// Use the if-then-else construct available in Javascript. (Do not use Math.max) 
+	function max(a, b){
+		return (a > b) ? a : b;
+	}
+	
+// Define a function maxOfThree() that takes three numbers as arguments and returns the largest of them. (Do not use Math.max)
+	function maxOfThree(a, b, c){
+		return max(max(a,b),c);
+	}
+	
+	console.log("Max of 11, 34, 5 is :" + maxOfThree(11,34,5));
+// Write a function that takes a character (i.e. a string of length 1) and returns true if it is a vowel, false otherwise. 
+	function isVowel(ch){
+		var vowels = ['a', 'e', 'i', 'o', 'u'];
+		
+		return (vowels.indexOf(ch.toLowerCase()) != -1) ? true : false;
+	}
+	var ch = 'h';
+	console.log("is '" + ch + "' a vowel? " + isVowel(ch));
+	
+// Create a function which takes a string(sentence) as argument and alert each word. 
+// so if a sentence is "Javascript is fun" there alert should be displayed with each of the word Javascript , is & fun.
+	function alertTokens(str){
+		if(str.length < 1){
+			alert("<ERROR: EMPTY STRING>");
+		}
+		else {
+				str.split(" ").forEach(function(entry, i){
+					alert(entry.trim());
+					alert(i);
+					
+					
+				});
+		}
+	}
+	var test = "Let's go hunting!!";
+	alertTokens(test);
+	
+//Define a function sum() and a function multiply() that sums and multiplies (respectively) all the numbers in an array of numbers. 
+//For example, sum([1,2,3,4]) should return 10, and multiply([1,2,3,4]) should return 24.
+	function sum(array){
+		var total = 0;
+		array.forEach(function(entry){
+			total += entry;
+		});
+		return total;
+	}
+	console.log(sum([1,2,4]));
+	
+	function multiply(array){
+		
+		if(array.length === 1) return array.shift();
+		else{
+			return array.shift() * multiply(array);
+		}
+	}
+	console.log(multiply([2,4,50]));
+	
+// Define a function reverse() that computes the reversal of a string. 
+// For example, reverse("jag testar") should return the string "ratset gaj".
+	function reverse(st1){
+		if(st1.length === 1){
+			return st1;
+		}
+		else{
+			return st1.charAt(st1.length - 1) + reverse(st1.substring(0, st1.length - 1));
+		}
+	}
+	
+	console.log("Reversed String: "+ reverse("!!!NOW EW"));
+
+// Write a function findLongestWordLength()  that takes an array and returns the length of the longest words.
+	function findLongestWordLength(arry){
+		if(arry.length < 1){
+			return -1;
+		}
+		else{
+			//console.log(arry);
+			var max = arry[0].length;
+			arry.forEach(function(entry){
+				max = (max < entry.length) ? entry.length : max;
+			});
+			return max;
+		}
+	}
+	console.log(findLongestWordLength(["test", "t2", "kismet"]));
+
+// Write a function filterLongWords() that takes an array of words and an integer i and returns the array of words that are longer than i.
+	function filterLongWords(array, i){
+		return array.filter(function(entry){
+			return entry.length > i;
+		});
+	}
+	console.log(filterLongWords(["a", "ab", "abcd", "bc", "Optimal"], 3));
+</script>
+</body>
+</html>
