@@ -1,0 +1,61 @@
+<html>
+<head>
+ <title>JavaScript Object Oriented Programming(OOPs) Practice</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	//Software class definition
+	function Software (name, version){
+			this.name = (name.length > 0) ? name : "<Un-Named>";
+			this.version = (version.length > 0) ? version : "<Development In Progress>";
+	}
+		
+	Software.prototype.getName = function(){
+			return this.name;
+	}
+		
+	Software.prototype.version = function(){
+			return this.version;
+	}
+	
+	//Hardware class definition
+	function Hardware(type, name){
+			this.type = (type.length > 0) ? type: "<Unknown>";
+			this.name = (name.length > 0) ? name: "<Un-Named>";
+	}
+		
+	Hardware.prototype.getType= function(){
+			return this.type;
+	}
+		
+	Hardware.prototype.getName= function(){
+			return this.name;
+	}
+	
+	//Laptop class definition
+	function Laptop(software, hardware){
+			this.software = (software) ? software : new Software("","");
+			this.hardware = (hardware) ? hardware : new Hardware("","");
+	}
+	
+	Software.prototype.getSoftware = function(){
+			return this.software;
+		}
+		
+	Software.prototype.getHardware = function(){
+			return this.hardware;
+	}
+	
+	//Program Start
+	
+	var hdware = new Hardware("External", "DVD Drive");
+	var sftware = new Software("Adobe Photoshop", "3.0");
+	
+	var myLaptop = new Laptop(sftware, hdware);
+	var yourlap = new Laptop();
+	
+	//Program End
+</script>
+</body>
+</html>
