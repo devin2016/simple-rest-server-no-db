@@ -28,13 +28,17 @@
 				}
 			}
 		}
+		else
+		{
+			this.setHours(this.getHours() + hours);
+		}
 	}
 
 	var d = new Date();	
 
 	document.write("<h1>" + d.toString() + "</h1>")
 	
-	d.addHours(10);
+	d.addHours(-3);
 	
 	document.write("<h1>" + d.toString() + "</h1>")
 </script>
