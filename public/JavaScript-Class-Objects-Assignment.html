@@ -15,7 +15,7 @@
 			return this.name;
 	}
 		
-	Software.prototype.version = function(){
+	Software.prototype.getVersion = function(){
 			return this.version;
 	}
 	
@@ -54,6 +54,8 @@
 	
 	var myLaptop = new Laptop(sftware, hdware);
 	var yourlap = new Laptop();
+	
+	var test = Object.create(Software);
 	
 	//Program End
 </script>
