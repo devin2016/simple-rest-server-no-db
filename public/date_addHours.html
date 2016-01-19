@@ -4,17 +4,39 @@
 </head>
 <body>
 <script type="text/javascript">
-	Date.prototype.addHours = function (hours){
-		var newMillis = this.valueOf() + (hours * 60 * 60 * 1000);
-		return new Date(newMillis);
+	Date.prototype.addHours = function (hours)
+	{	
+		//Check if adding hours will change the day.
+		if(this.getHours() + hours > 24)
+		{
+			this.setHours(this.getHours() + hours - 24);
+			
+			//Check if it is end of the month
+			var daysInThisMonth = new Date(this.getFullYear(), this.getMonth, 0).getDate();
+			if(this.getDate + 1 > daysInThisMonth)
+			{
+				//Check if it is end of the year
+				if(this.getMonth == 12)
+				{
+					this.setFullYear(this.getFullYear() + 1);
+					this.setMonth(1);
+					this.setDate(1);
+				}
+				else
+				{
+					this.setMonth(this.getMonth() + 1);
+				}
+			}
+		}
 	}
 
 	var d = new Date();	
-	var d2 = d.addHours(24);
+
+	document.write("<h1>" + d.toString() + "</h1>")
+	
+	d.addHours(10);
 	
 	document.write("<h1>" + d.toString() + "</h1>")
-	document.write("<h1>" + d2.toString() + "</h1>")
-	
 </script>
 </body>
 </html>
