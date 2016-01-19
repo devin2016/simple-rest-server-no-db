@@ -1,0 +1,20 @@
+<html>
+<head>
+ <title>JavaScript Object Oriented Programming(OOPs) Practice</title>
+</head>
+<body>
+<script type="text/javascript">
+	Date.prototype.addHours = function (hours){
+		var newMillis = this.valueOf() + (hours * 60 * 60 * 1000);
+		return new Date(newMillis);
+	}
+
+	var d = new Date();	
+	var d2 = d.addHours(24);
+	
+	document.write("<h1>" + d.toString() + "</h1>")
+	document.write("<h1>" + d2.toString() + "</h1>")
+	
+</script>
+</body>
+</html>
