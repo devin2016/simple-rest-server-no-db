@@ -1,0 +1,59 @@
+html{
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+body{
+	width: 900px;
+	border: 3px solid gray;
+}
+
+header{
+	background-color: #4279A5;
+    font-family: verdana, sans-serif;
+    color: white;
+}
+
+nav{
+    border: 1px solid white;
+    height: 28px;
+}
+
+nav ul{
+	list-style-type: none;
+    margin-left: -40px;
+    margin-top: 0px;
+}
+
+nav li{
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: auto;
+    border-right: 1px solid white;
+}
+nav a{
+    color: white;
+    font-size: 12px;
+    font: Arial, Sans-serif;
+    text-decoration: none;
+}
+
+main{
+	
+}
+
+aside{
+	
+}
+
+footer{
+	
+}
+
+.textWhite{
+	color: white;
+}
+
+.textBlack{
+	color: black;
+}
