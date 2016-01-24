@@ -8,52 +8,135 @@ body{
 	border: 3px solid gray;
 }
 
+body p, h1, h3{
+    font-family: calibri, verdana, sans-serif;
+    color: black;
+}
+
 header{
 	background-color: #4279A5;
-    font-family: verdana, sans-serif;
+    font-family: verdana, calibri, sans-serif;
     color: white;
+    margin-top: 0px;
+    border: 1px solid white;
+}
+
+header h1{
+    padding-top: 15px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+header p{
+    margin-top: 0px;
+    margin-left: 40px;
 }
 
 nav{
-    border: 1px solid white;
+    border-top: 1px solid white;
     height: 28px;
 }
 
 nav ul{
 	list-style-type: none;
-    margin-left: -40px;
-    margin-top: 0px;
+    background-color: #528ABD;
+    height: 29px;
+    width: auto;
+    margin: 0px;
+    padding-left: 0px;
 }
 
 nav li{
     display: inline-block;
-    padding: 5px 10px;
-    margin-top: auto;
+    padding: 5px 15px;
+    float:left;
     border-right: 1px solid white;
 }
+
+nav li:hover{
+    background-color: #84B2DE;
+}
+
 nav a{
     color: white;
     font-size: 12px;
-    font: Arial, Sans-serif;
+    font-family: Arial, Sans-serif;
     text-decoration: none;
 }
 
 main{
-	
+	width: 73%;
+    float: none;
+    height: auto;
 }
 
+main div{
+    width: 45%;
+}
+
+main>div{
+    width: 86%;
+    overflow: auto;
+    padding-left: 15px;
+}
+
+
 aside{
-	
+	width: 24%;
+    float: right;
+    padding: 0px;
+    padding-top: 15px;
+    padding-right: 25px;
+    margin: 0px;
+}
+
+aside ul{
+    list-style-type: none;
+    display: block;
+    margin-left: -20px;
+}
+
+aside li{
+    margin-top: 10px;
+}
+
+aside a{
+    color: black;
+    font-size: 12px;
+    font-family: calibri, verdana, sans-serif;
+    text-decoration: none;
 }
 
 footer{
-	
+    width: auto;
+    background-color: #528ABD;
+    margin: auto;
+    margin-top: 5px;
+}
+
+footer p{
+    padding: 5px 0px;
+    margin: 0px;
+    text-align: center;
 }
 
 .textWhite{
 	color: white;
 }
 
-.textBlack{
-	color: black;
+.leftdiv{
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.rightdiv{
+    float: right;
+    padding-right: 10px;
+}
+
+.coloredBox{
+    background-color: #FFFBFF;
+    border: 1px solid gray;
+    padding-left: 10px;
 }
