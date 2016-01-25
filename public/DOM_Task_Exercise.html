@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM Exercise</title> 
+    <style type="text/css">
+        .hide{
+            display: none;
+        }
+        
+        #left{
+            float: left; 
+            width: 249px; 
+            height: 190px;
+            border-right: 1px solid gray;
+            padding-top: 10px;
+        }
+        
+        #right{
+            width: 250px; 
+            height: 200px;
+            float: right; 
+        }
+        
+        input{
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        
+        p{
+            margin-left: 25px;
+        }
+    </style>
+</head>
+    <body>
+        <div style="width: 500px; height: 200px; border: 1px solid gray">
+            <div id="left">
+                <input type="checkbox" value="Apple">Apple<br>
+                <input type="checkbox" value="Mango">Mango<br>
+                <input type="checkbox" value="Grape">Grape<br>
+                <input type="checkbox" value="Strawberry">Strawberry<br>
+                <input type="checkbox" value="Cherry">Cherry<br>
+            </div>
+            <div id="right">
+                <p id="Apple" class="hide">Apple</span>
+                <p id="Mango" class="hide">Mango</span>
+                <p id="Grape" class="hide">Grape</span>
+                <p id="Strawberry" class="hide">Strawberry</span>
+                <p id="Cherry" class="hide">Cherry</span>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            
+            var handle = document.getElementsByTagName("input");
+            console.log(handle);
+            for(var i = 0; i < handle.length; i++)
+                handle[i].addEventListener("click", myFunc);
+            
+            function myFunc(){
+                var p = document.getElementById(this.value);
+                
+                if(p && p.classList.contains("hide")){
+                    p.setAttribute("class", "");;
+                }
+                else if(p && !p.classList.contains("hide")){
+                    p.setAttribute("class", "hide");
+                }                
+            };
+            
+            
+        </script>
+    
+    </body>
+    
+</html>
