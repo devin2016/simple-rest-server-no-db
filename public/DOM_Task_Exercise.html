@@ -40,13 +40,7 @@
                 <input type="checkbox" value="Strawberry"><span>Strawberry</span><br>
                 <input type="checkbox" value="Cherry"><span>Cherry</span><br>
             </div>
-            <div id="right">
-                <p id="Apple" class="hide">Apple</span>
-                <p id="Mango" class="hide">Mango</span>
-                <p id="Grape" class="hide">Grape</span>
-                <p id="Strawberry" class="hide">Strawberry</span>
-                <p id="Cherry" class="hide">Cherry</span>
-            </div>
+            <div id="right"></div>
         </div>
         
         <script type="text/javascript">
@@ -57,19 +51,25 @@
             {
                 handle[i].addEventListener("click", clickCheckbox);
                 
-                //Text click even triggers myFunc()
+                //Text click event triggers clickCheckbox.
                 handle[i].nextSibling.addEventListener("click", clickText);
             }
             
             function clickCheckbox(){
+                //Create or Delete corresponding tag from the right div
                 var p = document.getElementById(this.value);
                 
-                if(p && p.classList.contains("hide")){
-                    p.setAttribute("class", "");;
+                //Create new node if it doesn't exist
+                if(!p){
+                    p = document.createElement("p");
+                    p.id = this.value;
+                    p.innerHTML = this.value;
+                    document.getElementById("right").appendChild(p);
                 }
-                else if(p && !p.classList.contains("hide")){
-                    p.setAttribute("class", "hide");
-                }                
+                else{
+                    //Delete the node if it exists
+                    document.getElementById("right").removeChild(p);
+                }               
             };
             
             //Clicking text next to input will fire the same event as above
