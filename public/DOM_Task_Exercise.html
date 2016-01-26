@@ -3,22 +3,28 @@
 <head>
 <title>DOM Exercise</title> 
     <style type="text/css">
-        .hide{
-            display: none;
+        body{
+            
         }
-        
         #left{
             float: left; 
-            width: 249px; 
-            height: 190px;
+            width: 245px; 
+            min-height: 99px;
             border-right: 1px solid gray;
-            padding-top: 10px;
         }
         
         #right{
-            width: 250px; 
-            height: 200px;
+            width: 245px; 
+            min-height: 100px;
             float: right; 
+        }
+        
+        #main{
+            width: 500px; 
+            min-height: 100px;
+            height: auto; 
+            border: 1px solid gray;
+            overflow: auto;
         }
         
         input{
@@ -26,35 +32,92 @@
             margin-top: 10px;
         }
         
-        p{
+       #right p{
+            margin: 0px;
             margin-left: 25px;
+            padding: 5px 0px;
+        }
+        
+        button{
+            position: relative;
+            top: 0px;
+            left: 0px;
         }
     </style>
 </head>
     <body>
-        <div style="width: 500px; height: 200px; border: 1px solid gray">
-            <div id="left">
-                <input type="checkbox" value="Apple"><span>Apple</span><br>
-                <input type="checkbox" value="Mango"><span>Mango</span><br>
-                <input type="checkbox" value="Grape"><span>Grape</span><br>
-                <input type="checkbox" value="Strawberry"><span>Strawberry</span><br>
-                <input type="checkbox" value="Cherry"><span>Cherry</span><br>
-            </div>
+        <div id="main">
+            <div id="left"></div>
+            
             <div id="right"></div>
         </div>
         
         <script type="text/javascript">
+            //Create button object
+            var btn = document.createElement("BUTTON");
+            btn.appendChild(document.createTextNode("Add New Fruit"));
             
-            var handle = document.getElementsByTagName("input");
-            //console.log(handle);
-            for(var i = 0; i < handle.length; i++)
-            {
-                handle[i].addEventListener("click", clickCheckbox);
+            //Append button to body
+            document.body.appendChild(btn).appendChild(document.createElement("br"));
+            
+            //Add event listener to the button
+            document.getElementsByTagName("button")[0].addEventListener("click", addNewFruit);
+            
+            /*
+                Callback Function to prompt the user to enter a new fruit to the list
+                at button click even
+            */
+            function addNewFruit(){
+                var fruitName = prompt("Enter new Fruit: ");
+                if(fruitName != "undefined" && doesntExist(fruitName)){
+                    var inp = document.createElement("input");
+                    inp.type = "checkbox";
+                    inp.value = fruitName;
+                    
+                    //Create label for input
+                    var spn = document.createElement("span");
+                    spn.innerHTML = fruitName;
+                    
+                    var handle = document.getElementById("left");
+                    
+                    handle.appendChild(inp);
+                    handle.appendChild(spn);
+                    attachEvent(inp);
+                    
+                    handle.appendChild(document.createElement("br"));
+                }
+                else{
+                    alert("Invalid Fruit Name Entered!!");
+                }
+            };
+            
+            /*
+                check if fruit exists in the checkbox list
+            */
+            function doesntExist(fruitname){
+                var test = document.getElementsByTagName("input");
+                
+                for(var i = 0; i < test.length ; i++)
+                    if(test[i].value.toLowerCase() == fruitname.toLowerCase()){
+                        return false;
+                    }
+                
+                return true;
+            };
+            
+            /*
+            Attach click event to each new fruit objects
+            */
+            function attachEvent(obj){
+                obj.addEventListener("click", clickCheckbox);
                 
                 //Text click event triggers clickCheckbox.
-                handle[i].nextSibling.addEventListener("click", clickText);
-            }
+                obj.nextSibling.addEventListener("click", clickText);
+            };
             
+            /*
+                Call back for checkbox click event
+            */
             function clickCheckbox(){
                 //Create or Delete corresponding tag from the right div
                 var p = document.getElementById(this.value);
@@ -65,6 +128,7 @@
                     p.id = this.value;
                     p.innerHTML = this.value;
                     document.getElementById("right").appendChild(p);
+                    
                 }
                 else{
                     //Delete the node if it exists
@@ -72,7 +136,9 @@
                 }               
             };
             
-            //Clicking text next to input will fire the same event as above
+            /*
+                Clicking text next to input will fire the same event as above
+            */
             function clickText(){
                 this.previousSibling.click();
             };
