@@ -34,11 +34,11 @@
     <body>
         <div style="width: 500px; height: 200px; border: 1px solid gray">
             <div id="left">
-                <input type="checkbox" value="Apple">Apple<br>
-                <input type="checkbox" value="Mango">Mango<br>
-                <input type="checkbox" value="Grape">Grape<br>
-                <input type="checkbox" value="Strawberry">Strawberry<br>
-                <input type="checkbox" value="Cherry">Cherry<br>
+                <input type="checkbox" value="Apple"><span>Apple</span><br>
+                <input type="checkbox" value="Mango"><span>Mango</span><br>
+                <input type="checkbox" value="Grape"><span>Grape</span><br>
+                <input type="checkbox" value="Strawberry"><span>Strawberry</span><br>
+                <input type="checkbox" value="Cherry"><span>Cherry</span><br>
             </div>
             <div id="right">
                 <p id="Apple" class="hide">Apple</span>
@@ -52,11 +52,16 @@
         <script type="text/javascript">
             
             var handle = document.getElementsByTagName("input");
-            console.log(handle);
+            //console.log(handle);
             for(var i = 0; i < handle.length; i++)
-                handle[i].addEventListener("click", myFunc);
+            {
+                handle[i].addEventListener("click", clickCheckbox);
+                
+                //Text click even triggers myFunc()
+                handle[i].nextSibling.addEventListener("click", clickText);
+            }
             
-            function myFunc(){
+            function clickCheckbox(){
                 var p = document.getElementById(this.value);
                 
                 if(p && p.classList.contains("hide")){
@@ -65,6 +70,11 @@
                 else if(p && !p.classList.contains("hide")){
                     p.setAttribute("class", "hide");
                 }                
+            };
+            
+            //Clicking text next to input will fire the same event as above
+            function clickText(){
+                this.previousSibling.click();
             };
             
             
