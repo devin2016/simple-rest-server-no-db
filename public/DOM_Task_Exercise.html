@@ -3,9 +3,7 @@
 <head>
 <title>DOM Exercise</title> 
     <style type="text/css">
-        body{
-            
-        }
+
         #left{
             float: left; 
             width: 245px; 
@@ -47,21 +45,69 @@
 </head>
     <body>
         <div id="main">
-            <div id="left"></div>
-            
+			<div id="left">
+				<input type="checkbox" value="Apple" /><span>Apple</span><br>
+				<input type="checkbox" value="Mango" /><span>Mango</span><br>
+				<input type="checkbox" value="Strawberry" /><span>Strawberry</span><br>
+				<input type="checkbox" value="Banana" /><span>Banana</span><br>
+				<input type="checkbox" value="Cherry" /><span>Cherry</span><br>
+			</div>
             <div id="right"></div>
-        </div>
-        
+		</div>
+		
+        <button type="button" onclick="addNewFruit()">Add Fruit</button>
+		
         <script type="text/javascript">
-            //Create button object
-            var btn = document.createElement("BUTTON");
-            btn.appendChild(document.createTextNode("Add New Fruit"));
-            
-            //Append button to body
-            document.body.appendChild(btn).appendChild(document.createElement("br"));
-            
-            //Add event listener to the button
-            document.getElementsByTagName("button")[0].addEventListener("click", addNewFruit);
+			document.getElementById("left").addEventListener("click", handleEvent);
+			
+			function handleEvent(e){
+				var p, id, tagClicked;
+				
+				if(e)
+				{
+					tagClicked = e.target.tagName;
+					
+					if(tagClicked.toLowerCase() == "span")
+					{
+						id = e.target.innerHTML;
+						
+						var loop = document.getElementsByTagName("input");
+						
+						for(var i = 0; i < loop.length; i++){
+							if(loop[i].value == id){
+								if(loop[i].checked == true){
+									loop[i].checked = undefined;
+								}
+								else {
+									loop[i].checked = true;
+								}
+							}
+						}
+					}
+					else if(tagClicked.toLowerCase()=="input")
+					{
+						id = e.target.value;
+					}
+					else{
+						console.log("<Blank Space Clicked>");
+						return;
+					}
+					
+					p = document.getElementById(id);
+					
+					//Create new node if it doesn't exist
+					if(!p){
+						p = document.createElement("p");
+						p.id = id;
+						p.innerHTML = id;
+						document.getElementById("right").appendChild(p);
+					}
+					else{
+						//Delete the node if it exists
+						document.getElementById("right").removeChild(p);
+					}
+				}
+			};
             
             /*
                 Callback Function to prompt the user to enter a new fruit to the list
@@ -69,25 +115,24 @@
             */
             function addNewFruit(){
                 var fruitName = prompt("Enter new Fruit: ");
-                if(fruitName != "undefined" && doesntExist(fruitName)){
+                
+				if(fruitName != undefined && doesntExist(fruitName)){
                     var inp = document.createElement("input");
                     inp.type = "checkbox";
                     inp.value = fruitName;
                     
-                    //Create label for input
+                    //Create span for input
                     var spn = document.createElement("span");
                     spn.innerHTML = fruitName;
                     
                     var handle = document.getElementById("left");
                     
                     handle.appendChild(inp);
-                    handle.appendChild(spn);
-                    attachEvent(inp);
-                    
+                    handle.appendChild(spn);                    
                     handle.appendChild(document.createElement("br"));
                 }
                 else{
-                    alert("Invalid Fruit Name Entered!!");
+                    alert("Duplicate Entry Found");
                 }
             };
             
@@ -104,46 +149,6 @@
                 
                 return true;
             };
-            
-            /*
-            Attach click event to each new fruit objects
-            */
-            function attachEvent(obj){
-                obj.addEventListener("click", clickCheckbox);
-                
-                //Text click event triggers clickCheckbox.
-                obj.nextSibling.addEventListener("click", clickText);
-            };
-            
-            /*
-                Call back for checkbox click event
-            */
-            function clickCheckbox(){
-                //Create or Delete corresponding tag from the right div
-                var p = document.getElementById(this.value);
-                
-                //Create new node if it doesn't exist
-                if(!p){
-                    p = document.createElement("p");
-                    p.id = this.value;
-                    p.innerHTML = this.value;
-                    document.getElementById("right").appendChild(p);
-                    
-                }
-                else{
-                    //Delete the node if it exists
-                    document.getElementById("right").removeChild(p);
-                }               
-            };
-            
-            /*
-                Clicking text next to input will fire the same event as above
-            */
-            function clickText(){
-                this.previousSibling.click();
-            };
-            
-            
         </script>
     
     </body>
