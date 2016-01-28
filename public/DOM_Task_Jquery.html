@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM Exercise</title> 
+    <style type="text/css">
+        #left{
+            float: left; 
+            width: 245px; 
+            min-height: 99px;
+            border-right: 1px solid gray;
+        }
+        
+        #right{
+            width: 245px; 
+            min-height: 100px;
+            float: right; 
+        }
+        
+        #main{
+            width: 500px; 
+            min-height: 100px;
+            height: auto; 
+            border: 1px solid gray;
+            overflow: auto;
+        }
+        
+        input{
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        
+       #right p{
+            margin: 0px;
+            margin-left: 25px;
+            padding: 5px 0px;
+        }
+        
+        button{
+            position: relative;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+    <body>
+        <div id="main">
+			<div id="left">
+				<input type="checkbox" value="Apple" /><span>Apple</span><br>
+				<input type="checkbox" value="Mango" /><span>Mango</span><br>
+				<input type="checkbox" value="Strawberry" /><span>Strawberry</span><br>
+				<input type="checkbox" value="Banana" /><span>Banana</span><br>
+				<input type="checkbox" value="Cherry" /><span>Cherry</span><br>
+			</div>
+            <div id="right"></div>
+		</div>
+		
+        <button type="button">Add Fruit</button>
+		
+		<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript">
+			
+			$("#left").click(function(e)
+			{
+				var ident, tagClicked;
+
+				if(e)
+				{
+					tagClicked = e.target.tagName;
+					
+					if(tagClicked.toLowerCase() == "span")
+					{
+						ident = e.target.innerHTML;
+						
+						$.each($("input"), function()
+						{
+							if($(this).val() == ident)
+							{
+								console.log("Checkbox status was: " + $(this).attr("checked"));
+								$(this).attr("checked" , function()
+								{
+									return ($(this).attr("checked") == undefined) ? true : false;
+								});
+							}
+						});
+					}
+					else if(tagClicked.toLowerCase()=="input")
+					{
+						ident = e.target.value;
+					}
+					else
+					{
+						console.log("<Blank Space Clicked>");
+						return;
+					}
+						
+					//Create new node if it doesn't exist
+					if($("#" + ident).length == 0)
+					{
+						$("<p/>", {id: ident}).html(ident).appendTo("#right");
+					}
+					else
+					{
+						//Delete the node if it exists
+						$("#" + ident).remove();
+					}
+				}
+			});
+            
+            /*
+                Callback Function to prompt the user to enter a new fruit to the list
+                at button click even
+            */
+            $("button").click(function()
+			{
+                var fruitName = prompt("Enter new Fruit: ");
+				
+				if(fruitName.length >= 0 && doesntExist(fruitName))
+				{
+                    $("<input/>", { type: "checkbox", value: "" + fruitName }).appendTo("#left");
+					$("<span/>").html(fruitName).appendTo("#left");
+					$("<br/>").appendTo("#left");
+                }
+                else
+				{
+                    alert("Invalid/Duplicate Entry Found");
+                }
+            });
+            
+            /*
+                check if fruit exists in the checkbox list
+            */
+            function doesntExist(fruitname)
+			{   
+				var $exists = true;
+				
+				$.each($("div input"), function(i, val)
+				{
+					if($(this).val().toLowerCase() == fruitname.toLowerCase())
+						$exists = false;
+				});
+				
+				return $exists;
+            };
+			
+        </script>
+    
+    </body>
+    
+</html>
