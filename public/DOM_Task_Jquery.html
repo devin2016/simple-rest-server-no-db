@@ -53,38 +53,28 @@
 			</div>
             <div id="right"></div>
 		</div>
-		
         <button type="button">Add Fruit</button>
 		
 		<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript">
-			
 			$("#left").click(function(e)
 			{
 				var ident, tagClicked;
-
 				if(e)
 				{
-					tagClicked = e.target.tagName;
+					tagClicked = e.target.tagName.toLowerCase();
 					
-					if(tagClicked.toLowerCase() == "span")
+					if(tagClicked == "span")
 					{
 						ident = e.target.innerHTML;
 						
-						$.each($("input"), function()
+						$("input[value=" + ident + "]").attr("checked" , function()
 						{
-							if($(this).val() == ident)
-							{
-								console.log("Checkbox status was: " + $(this).attr("checked"));
-								$(this).attr("checked" , function()
-								{
-									return ($(this).attr("checked") == undefined) ? true : false;
-								});
-							}
+							return $(this).attr("checked") == undefined ? true : false;
 						});
 					}
-					else if(tagClicked.toLowerCase()=="input")
+					else if(tagClicked =="input")
 					{
 						ident = e.target.value;
 					}
@@ -131,17 +121,11 @@
                 check if fruit exists in the checkbox list
             */
             function doesntExist(fruitname)
-			{   
-				var $exists = true;
-				
-				$.each($("div input"), function(i, val)
-				{
-					if($(this).val().toLowerCase() == fruitname.toLowerCase())
-						$exists = false;
-				});
-				
-				return $exists;
-            };
+			{			
+				return ($("input").filter(function(i, val){
+					return $(this).val().toLowerCase() == fruitname.toLowerCase();
+				}).length < 1);
+			};
 			
         </script>
     
