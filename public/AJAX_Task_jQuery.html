@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM Exercise</title> 
+</head>
+    <body>
+        <button id="btn" type="button">Load Data</button>
+		<div id="content"></div>
+        
+		<script src="../../git/javascripts/jquery1.12.min.js"></script>
+		<script src="../../git/javascripts/jquery1.2.1.migrate.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                getXMLData();  
+				console.log("{age}");
+            });
+            
+            /*
+			function getData(){
+                $.ajax({
+                    url: "testxmldata.xml",
+                    
+                    type: "GET",
+                    
+                    dataType: "xml",
+                    
+                    success: successFn,
+                    
+                    error: errorFn,
+                    
+                    complete: function(xhr, status){
+                                console.log("The request is complete.");
+                              }
+                });
+            }*/
+			
+			function getXMLData(){
+				$.get("testxmldata.xml", function(result){
+					var ostype = result.getElementsByTagName("type");
+					console.log(ostype);
+					$("content").append(ostype.nodeValue);
+				});
+			};
+            
+            function successFn(result){
+                console.log("Got the resule");
+            };
+            
+            function errorFn(xhr, status, strErr){
+                console.log("Got an Error");
+            } ;  
+        </script>
+    
+    </body>
+    
+</html>

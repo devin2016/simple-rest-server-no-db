@@ -1,0 +1,18 @@
+<software>
+	<type>Operating System</type>
+		<Windows>
+			<version>7</version>
+			<grade>Ultimate</grade>
+			<key>vyw4p-79gxj-7mqv8-tm2fq-7k3xx</key>
+		</windows>
+		<Windows>
+			<version>7</version>
+			<grade>Professional</grade>
+			<key>VTY2R-DPJ6K-TDQ23-JKVRP-TKRT9</key>
+		</windows>
+		<apple>
+			<version>9</version>
+			<grade>iOs</grade>
+			<key>Default apple key</key>
+		</apple>
+</software>

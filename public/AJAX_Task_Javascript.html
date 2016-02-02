@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>JavaScript Exercise</title>
+</head>
+<body>
+<script type="text/javascript">
+	document.write("<h1>" + Date() + "</h1><br>");
+</script>
+<div id="placehere"></div>
+<label><button value="Get Data" id="btn"/> : Click to get Data</label>
+<script>
+	document.getElementById("btn").addEventListener("click", function(){
+		var url = "domains-info.txt";
+		var text = new XMLHttpRequest();
+		
+		text.onreadystatechange = function()
+		{
+			if (text.readyState== 4 && text.status == 200)
+			{
+				document.getElementById("placehere").innerHTML = myFunc(text.responseText);
+			}
+		}
+		text.open("GET",url,true);
+		text.send();
+	});
+	
+	function myFunc(text)
+	{
+		var test = text.trim().split("\n");
+		console.log(test);
+		var newString = "<p>Request Processed @::" + Date() + "</p><br>";
+		for(var i=0; i< test.length; i++)
+		{
+			newString += "<p>" + test[i] + "</p><br>";
+		}
+		return newString;
+	}
+</script>
+</body>
+</html>
