@@ -2,9 +2,14 @@
 <html>
 <head>
 <title>FORM Exercise</title> 
+    <style>
+        .ccard{
+            border: 1px solid gray;
+        }
+    </style>
 </head>
     <body>
-        <form action="/users" method="post">
+        <form method="post" action="/users">
             <fieldset style="width: 400px">
                 <legend>Contact Card:</legend>
             <table>
@@ -27,16 +32,83 @@
                     <td>Zip :</td><td><input type="text" value="" name="zip" /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Save"/></td>
+                    <td></td><td><input id="submitBtn" type="submit" value="Save"/></td>
                 </tr>
             </table>
             </fieldset>
         </form>
-    <script>
-        //Client Side Validation
-            //
-            //
-            //
+        <br><br>
+        <div id="responseDiv">
+        
+        </div>
+        
+        
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript">
+            var formData = [];
+        $(document).ready(function(){
+                $("form").submit(function(e)
+                {  
+                    formData = 
+                    { fname:$("input[name='fName']").val(),
+                                 lname:$("input[name='lName']").val(),
+                                 street:$("input[name='street']").val(),
+                                 city:$("input[name='city']").val(),
+                                 state:$("input[name='state']").val(),
+                                 zip:$("input[name='zip']").val(),
+                    };
+        
+                    $.ajax({
+                        url: "/users",
+
+                        type: "post",
+                        
+                        data: formData,
+ 
+                        success: successFn,
+
+                        error: errorFn,
+
+                        complete: function(xhr, status){
+                                    console.log("The request is complete.");
+                                  }
+                    });
+                    
+                    e.preventDefault();
+                });
+                });
+            
+            function successFn(response)
+            {   
+                var newId = response.id;
+                
+                $("#responseDiv").html(printCard(response));
+                $.get(
+                    "/users", 
+                    function(result){
+                        console.log(result);
+                        for(i = 1; i < newId; i++)
+                            $("#responseDiv").append(printCard(result[i-1]));
+                    },
+                   "json" 
+                );
+            }
+            
+            function printCard(response){
+                var contactCard = "<div class='ccard'><table><tr><td>First Name:</td><td>"+ response.fname + "</td><tr>";
+                    contactCard += "<tr><td>Last Name:</td><td>" + response.lname + "</td><tr>";
+                    contactCard += "<tr><td>Street:</td><td>" + response.street + "</td><tr>";
+                    contactCard += "<tr><td>City:</td><td>" + response.city + "</td><tr>";
+                    contactCard += "<tr><td>State:</td><td>" + response.state + "</td><tr>";
+                    contactCard += "<tr><td>Zip:</td><td>" + response.zip + "</td><tr></table>";
+                    contactCard += "</div>";
+                return contactCard;
+            }
+            
+            function errorFn(xhr, status, strErr){
+                console.log("Got an Error");
+            } 
     </script>
     </body> 
 </html>
