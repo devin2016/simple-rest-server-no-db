@@ -47,16 +47,18 @@
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript">
             var formData = [];
-        $(document).ready(function(){
+        $(document).ready(function()
+        {
                 $("form").submit(function(e)
                 {  
                     formData = 
-                    { fname:$("input[name='fName']").val(),
-                                 lname:$("input[name='lName']").val(),
-                                 street:$("input[name='street']").val(),
-                                 city:$("input[name='city']").val(),
-                                 state:$("input[name='state']").val(),
-                                 zip:$("input[name='zip']").val(),
+                    { 
+                         fname:$("input[name='fName']").val(),
+                         lname:$("input[name='lName']").val(),
+                         street:$("input[name='street']").val(),
+                         city:$("input[name='city']").val(),
+                         state:$("input[name='state']").val(),
+                         zip:$("input[name='zip']").val(),
                     };
         
                     $.ajax({
@@ -70,8 +72,18 @@
 
                         error: errorFn,
 
-                        complete: function(xhr, status){
-                                    console.log("The request is complete.");
+                        complete: function()
+                                  {
+                                    console.log("The request is complete. Getting all contacts next");
+                                      $.get(
+                                        "/users", 
+                                        function(result){
+                                            console.log(result);
+                                            for(i = 1; i < result.length - 1; i++)
+                                                $("#responseDiv").append(printCard(result[i-1]));
+                                        },
+                                       "json" 
+                                    );
                                   }
                     });
                     
@@ -80,22 +92,12 @@
                 });
             
             function successFn(response)
-            {   
-                var newId = response.id;
-                
+            {
                 $("#responseDiv").html(printCard(response));
-                $.get(
-                    "/users", 
-                    function(result){
-                        console.log(result);
-                        for(i = 1; i < newId; i++)
-                            $("#responseDiv").append(printCard(result[i-1]));
-                    },
-                   "json" 
-                );
             }
             
-            function printCard(response){
+            function printCard(response)
+            {
                 var contactCard = "<div class='ccard'><table><tr><td>First Name:</td><td>"+ response.fname + "</td><tr>";
                     contactCard += "<tr><td>Last Name:</td><td>" + response.lname + "</td><tr>";
                     contactCard += "<tr><td>Street:</td><td>" + response.street + "</td><tr>";
@@ -106,7 +108,8 @@
                 return contactCard;
             }
             
-            function errorFn(xhr, status, strErr){
+            function errorFn(xhr, status, strErr)
+            {
                 console.log("Got an Error");
             } 
     </script>
