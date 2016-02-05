@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Devin's Digital Clock</title>
+		<style>
+		#digiClock
+		{
+		  border: 2px solid gray; 
+		  background-color: silver; 
+		  text-align: center; 
+		  display: block;
+		} 
+		</style>
+	</head>
+<body>
+	<h1 id="digiClock"></h1>
+	<script language="javascript">
+		var offSet = 100;
+		setInterval(function(disp){
+			disp = document.getElementById("digiClock");
+			var currentTime = new Date().toTimeString().split(" ")[0];
+			disp.innerHTML = currentTime;
+			
+		}, offSet = (offSet != 1000) ?  offSet += 100 : 1000);
+	</script>
+</body>
+</html>
