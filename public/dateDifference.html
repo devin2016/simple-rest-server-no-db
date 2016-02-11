@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Devin's Date Difference</title>
+		<style>
+		
+		</style>
+	</head>
+<body>
+	<h1 id="digiClock">Difference in days between two dates</h1>
+	
+	<form id="form1">
+		<label>Date 1 (mm/dd/YYYY): <input type="text" name="date1" value=""/></label><br><br>
+		<label>Date 2 (mm/dd/YYYY): <input type="text" name="date2" value=""/></label><br><br>
+		<button id="button1" type="button">Difference</button>
+	</form>
+	
+	<script language="javascript">
+	document.getElementById("button1").addEventListener("click", function(e)
+	{	
+		e.preventDefault();
+		
+		var d1 = document.getElementsByTagName("input")[0].value;
+		var d2 = document.getElementsByTagName("input")[1].value;
+
+		var date1 = new Date(d1);
+		var date2 = new Date(d2);
+		
+		d1 = d1.split("/");
+		d2 = d2.split("/");
+
+		console.log(d1);
+		console.log(d2);
+		
+		var diff = getTotalDays(d2) - getTotalDays(d1);
+			
+		console.log(diff)
+	
+	});
+	
+	function getTotalDays(d1)
+	{
+		
+		var days = 0;
+		
+		for(var year = 1; year < d1[2]; year++)
+		{
+			if(year % 4 == 0)
+				days += 366;
+			else days += 365;
+		}
+		for(var month = 1; month < d1[0]; month++)
+		{
+			switch(month)
+			{
+				case 1: days += 31; 
+					break;
+				case 2: days += (d1[2]%4==0) ? 29 : 28;
+					break;
+				case 3: days += 31;
+					break;
+				case 4: days += 30;
+					break;
+				case 5: days += 31;
+					break;
+				case 6: days += 30;
+					break;
+				case 7: days += 31;
+					break;
+				case 8: days += 31;
+					break;
+				case 9: days += 30;
+					break;
+				case 10: days += 31;
+					break;
+				case 11: days += 30;
+					break;
+				case 12: days += 31;
+					break;
+			}
+		}
+		days += parseInt(d1[1]) - 1; // -1 to exclude the current day
+		
+		return days;
+	}
+	
+	
+	</script>
+</body>
+</html>

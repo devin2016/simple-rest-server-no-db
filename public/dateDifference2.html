@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Devin's Date Difference</title>
+		<style>
+		
+		</style>
+	</head>
+<body>
+	<h1 id="digiClock">Difference in days between two dates</h1>
+	
+	<form id="form1">
+		<label>Date 1 (mm/dd/YYYY): <input type="text" name="date1" value=""/></label><br><br>
+		<label>Date 2 (mm/dd/YYYY): <input type="text" name="date2" value=""/></label><br><br>
+		<button id="button1" type="button">Difference</button>
+	</form>
+	
+	<script language="javascript">
+	
+	function getTokens(date)
+	{
+		//Asserting date will always be mmddYYYY format
+		var by = date.charAt(date.length - 5);
+
+		by = date.split(by);
+		
+		return by;
+	};
+
+	function getTomorrow(date)
+	{
+		var month = parseInt(getTokens(date)[0]);
+		var day = parseInt(getTokens(date)[1]);
+		var year = parseInt(getTokens(date)[2]);
+		
+		var dim = [31, 28, 31, 30, 31, 30 , 31, 31, 30, 31, 30, 31];
+		
+		var daysInThisMonth = dim[month - 1];
+
+		if(month == 2 && year % 4 == 0)
+		{
+			isEndOfTheMonth = (++day > daysInThisMonth + 1);
+		}
+		else isEndOfTheMonth = (++day > daysInThisMonth);
+		
+		if(isEndOfTheMonth) 
+		{
+			++month;
+			if(month == 13)
+			{
+				year++;
+				date = "01/01/" + year;
+			}
+			else
+				date = ((month < 10) ? "0" + month : "" + month) + "/" + 01 + "/" + year;
+		}
+		else
+		{
+			date = ((month < 10) ? "0" + month : "" + month) +"/"+ day + "/" + year;
+		}
+		
+		return date;
+	};
+	
+	function getDifferenceInDays(date1, date2)
+	{
+		date1 = date1.trim();
+		date2 = date2.trim();
+		
+		if(date2 != getLaterDate(date1, date2))
+		{
+			var temp = date1;
+			date1 = date2;
+			date2 = temp;
+			console.log("Date Swapped " + date1 + " | " + date2);
+		}
+		
+		var dayDiff = 0, reachedMatch = equals(date1, date2);
+		
+		while(reachedMatch == false)
+		{
+			date1 = getTomorrow(date1);
+			reachedMatch = equals(date1, date2);
+			++dayDiff;	
+		}
+
+		return dayDiff - 1;// -1 to exclude current day
+	};
+
+	function equals(d1, d2)
+	{
+		d1 = getTokens(d1);
+		d2 = getTokens(d2);
+	
+		if(d1.length != d2.length) return false;
+		
+		for(var i = 0; i < d1.length; i++)
+		{
+			if(parseInt(d1[i]) != parseInt(d2[i]))
+				return false;
+		}
+
+		return true;
+	};
+	
+	function getLaterDate(d1, d2)
+	{
+		if(equals(d1,d2)) return d2;
+		
+		if(parseInt(getTokens(d1)[2]) < parseInt(getTokens(d2)[2])) 
+			return d2;
+		else if(parseInt(getTokens(d1)[0]) < parseInt(getTokens(d2)[0]))
+			return d2;
+		else if(parseInt(getTokens(d1)[1]) < parseInt(getTokens(d2)[1]))
+			return d2;
+		
+		return d1;
+	}
+	
+	var handle = document.getElementsByTagName("button")[0];
+	
+	handle.addEventListener("click", function(e){
+		e.preventDefault();
+	
+		var data1 = document.getElementsByTagName("input")[0].value;
+		var data2 = document.getElementsByTagName("input")[1].value;
+		var days = getDifferenceInDays(data1, data2);
+		
+		console.log("#Days between the dates: " + days);
+		console.log("" + Math.floor(days / 365) + " Years & " + (days % 365) + " days");
+		
+		return false;
+	});
+	console.log("Reached end");
+	</script>
+</body>
+</html>
