@@ -26,8 +26,8 @@
 		var date1 = new Date(d1);
 		var date2 = new Date(d2);
 		
-		d1 = d1.split("/");
-		d2 = d2.split("/");
+		d1 = d1.split(d1.charAt(d1.length - 5));
+		d2 = d2.split(d2.charAt(d2.length - 5));
 
 		console.log(d1);
 		console.log(d2);
@@ -79,9 +79,10 @@
 					break;
 			}
 		}
-		days += parseInt(d1[1]) - 1; // -1 to exclude the current day
+		days += parseInt(d1[1]) - 2; // -2 to exclude the current day
 		
-		return days;
+		
+		return (days <= 0) ? 0 : days;
 	}
 	
 	
