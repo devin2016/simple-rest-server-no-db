@@ -114,7 +114,17 @@
 	</div>
 </div>
 <script>
-
+$("#item-search").on("keyup", function(){
+	var temp = $(this).val().toLowerCase();
+	
+	$("[id^=prod]").each(function(){
+		var match = $(this).find("h3").html().toLowerCase();
+	
+		if(match.startsWith(temp) == false)
+			$(this).hide();
+		else $(this).show();
+	});
+});
 </script>
 </body>
 </html>
