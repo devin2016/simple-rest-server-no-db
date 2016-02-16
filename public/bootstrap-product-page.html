@@ -15,11 +15,23 @@
     padding-bottom: 0px;
     position: relative;
     bottom: 55px;
+	right: 100px;
+}
+
+.price-and-close span
+{
+	padding-left: 100px;
+}
+
+.container
+{
+	margin: 0px 10px;
+	width: 95%;
 }
 </style>
-<body>
 
-<nav class="navbar navbar-default">
+<body>
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Store</a>
@@ -34,26 +46,35 @@
 </nav>
 
 <div class="container">
-	<div class="col-md-2 list-group">
+	<div class="col-md-3 list-group">
 		<a href="#" class="list-group-item active">First option</a>
 		<a href="#" class="list-group-item">Second option</a>
 		<a href="#" class="list-group-item">Third option</a>
+		<a href="#" class="list-group-item">Fourth option</a>
 	</div>
 	
-	<div class="col-md-10">
+	<div class="col-md-9">
 		<form class="form-inline" role="form">
 			<div class="form-group">
-					<label for="name">Add Item:</label>
-					<input type="name" class="form-control" id="item-name">
+				<label for="Search">Search </label>
+				<input type="search" class="form-control" id="item-search" value="Search by item name">
+			</div>
+		</form>
+		<div style="margin-top: 15px;"></div>
+		
+		<form class="form-inline" role="form">
+			<div class="form-group">
+					<label for="name">Add Item</label>
+					<input type="name" class="form-control" id="item-name" value="item name">
 			</div>
 			<div class="form-group">
-				<label for="discription">Discription:</label>
-				<input type="discription" class="form-control" id="item-description">
+				<label for="discription">Discription</label>
+				<input type="discription" class="form-control" id="item-description" value="Description">
 			</div>
 			
 			<div class="form-group">
-				<label for="price">Price: </label>
-				<input type="price" class="form-control" id="item-price">
+				<label for="price">Price</label>
+				<input type="price" class="form-control" id="item-price" value="Price">
 			</div>
 		  
 			<button type="submit" class="btn btn-default">Add</button>
@@ -92,6 +113,8 @@
 		
 	</div>
 </div>
+<script>
 
+</script>
 </body>
 </html>
