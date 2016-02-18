@@ -10,20 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
-	<script id="template" type="text/x-handlebars-template">
-			{{#each this}}
-			<div class="well well-sm products" id="{{productId product_name}}">
-				<div>
-					<h3>{{product_name}}</h3>
-					<p>{{product_description}}</p>
-				</div>
-				<div class="price-and-close">
-					<button type="button" class="btn btn-primary">{{product_price}}</button>
-					<span class="glyphicon glyphicon-remove-sign"></span>
-				</div>
-			</div>
-			{{/each}}
-	</script>
+	
 </head>
 <style>
 .price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
@@ -82,7 +69,20 @@
 		<div style="margin-top: 15px;" id="allProducts"></div>
 	</div>
 </div>
-
+<script id="template" type="text/x-handlebars-template">
+			{{#each this}}
+			<div class="well well-sm products" id="{{tagId product_name}}_{{id}}">
+				<div><!--productId product_name-->
+					<h3>{{product_name}}</h3>
+					<p>{{product_description}}</p>
+				</div>
+				<div class="price-and-close">
+					<button type="button" class="btn btn-primary">{{product_price}}</button>
+					<span class="glyphicon glyphicon-remove-sign" id="remove_{{id}}"></span>
+				</div>
+			</div>
+			{{/each}}
+	</script>
 <script src="javascripts/products.js"></script>
 </body>
 </html>
