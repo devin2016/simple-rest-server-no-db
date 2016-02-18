@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Optimal infosystems Products</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- stylesheets -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- javascripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+	<script id="template" type="text/x-handlebars-template">
+			{{#each this}}
+			<div class="well well-sm products" id="{{productId product_name}}">
+				<div>
+					<h3>{{product_name}}</h3>
+					<p>{{product_description}}</p>
+				</div>
+				<div class="price-and-close">
+					<button type="button" class="btn btn-primary">{{product_price}}</button>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+				</div>
+			</div>
+			{{/each}}
+	</script>
+</head>
+<style>
+.price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
+.price-and-close span{padding-left: 100px;}
+.container{margin: 0px 10px;width: 95%;}
+</style>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Store</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Catalog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+	<div class="col-md-3 list-group">
+		<a href="#" class="list-group-item active">First option</a>
+		<a href="#" class="list-group-item">Second option</a>
+		<a href="#" class="list-group-item">Third option</a>
+		<a href="#" class="list-group-item">Fourth option</a>
+	</div>
+	
+	<div class="col-md-9" id="itemList">
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label for="Search">Search </label>
+				<input type="search" class="form-control" id="item-search" value="Search by item name">
+			</div>
+		</form>
+		<div style="margin-top: 15px;"></div>
+		
+		<form method="post" action="/Products" class="form-inline" role="form" id="addItems">
+			<div class="form-group">
+					<label for="name">Add Item</label>
+					<input type="name" class="form-control" id="item_name" value="item name">
+			</div>
+			<div class="form-group">
+				<label for="discription">Discription</label>
+				<input type="discription" class="form-control" id="item_description" value="Description">
+			</div>
+			
+			<div class="form-group">
+				<label for="price">Price</label>
+				<input type="price" class="form-control" id="item_price" value="Price">
+			</div>
+		  
+			<button type="submit" class="btn btn-default">Add</button>
+		</form>
+		<div style="margin-top: 15px;" id="allProducts"></div>
+	</div>
+</div>
+
+<script src="javascripts/products.js"></script>
+</body>
+</html>
