@@ -1,23 +1,14 @@
 var app = angular.module("ProductListApp", []);
 
-	var controllers = {};
+var controllers = {};
 
-	controllers.SimpleController = function($scope)
+	controllers.SimpleController = function($scope, $http) 
 	{
-			console.log("simple controller called");
-					// GET all the products at initial page load.
-					$.get(
-						"/Products", 
-							function(response)
-							{
-								//ng-init for initial data load
-								$scope.$apply(function(){
-									$scope.ng_products = response;
-								});
-								$("#allProducts").show();
-							},
-						"json" 
-					);
+		$http.get("/Products").then(function(response) 
+		{
+			$scope.ng_products = response.data;
+			$("#allProducts").show();
+		});
 	};
-
+	
 	app.controller(controllers);

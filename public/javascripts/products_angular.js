@@ -21,13 +21,9 @@ $(document).ready(function($scope)
 			
 			success: function(response)
 					{
-						var update = angular.element($("#allProducts")).scope();
-						update.$apply(function(){
-							if(update.ng_products.length > 0)
-								update.ng_products.push(response);
-							else update.ng_products = [].push(response);
-							
-						});
+						var scopeHandle = angular.element($("#allProducts")).scope();
+						scopeHandle.ng_products.push(response);
+						scopeHandle.$digest();
 					},
 			complete: function()
 					{
