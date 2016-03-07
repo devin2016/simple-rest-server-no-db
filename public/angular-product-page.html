@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Optimal infosystems Products</title>
+  <title>AngularJS Product Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- stylesheets -->
+ 
+	<!-- stylesheets -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  
-  <!-- javascripts -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 
+	<!-- javascripts -->
+	<script src="javascripts/jquery/jquery-1.12.0.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
 </head>
 <style>
-.price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
-.price-and-close span{padding-left: 100px;}
-.container{margin: 0px 10px;width: 95%;}
-#allProducts{ display: none;}
-body{ width: 1350px; overflow: auto;}
+		.price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
+		.price-and-close span{padding-left: 100px;}
+		.container{margin: 0px 10px;width: 95%;}
+		body{ width: 1350px; overflow: auto;}
 </style>
-<body>
+<body ng-app="ProductListApp" ng-controller="SimpleController" style="display:none;">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -53,42 +52,42 @@ body{ width: 1350px; overflow: auto;}
 		</form>
 		<div style="margin-top: 15px;">
 		
-		<form method="post" action="/Products" class="form-inline" role="form" id="addItems">
+		<form action="#" class="form-inline" role="form">
 			<div class="form-group">
 					<label for="name">Add Item</label>
-					<input type="name" class="form-control" id="item_name" value="item name">
+					<input type="name" class="form-control" ng-model="item.product_name" value="item name">
 			</div>
 			<div class="form-group">
-				<label for="discription">Discription</label>
-				<input type="discription" class="form-control" id="item_description" value="Description">
+				<label for="discription">Description</label>
+				<input type="discription" class="form-control" ng-model="item.product_description" value="Description">
 			</div>
 			
 			<div class="form-group">
 				<label for="price">Price</label>
-				<input type="price" class="form-control" id="item_price" value="Price">
+				<input type="price" class="form-control" ng-model="item.product_price" value="$0.00">
 			</div>
 		  
-			<button type="submit" class="btn btn-default">Add</button>
+			<button class="btn btn-default" type="submit" ng-click="addItem(item)">Add</button>
 		</form>
+		
 		</div>
-		<div style="margin-top: 15px;" id="allProducts" ng-app="ProductListApp" ng-controller="SimpleController">
-			<div class="well well-sm products init-hidden" ng-repeat="prod in ng_products | filter: prod_name">
+		<div style="margin-top: 15px;">
+			<div class="well well-sm products" ng-repeat="prod in ng_products | filter: prod_name">
 				<div>
 					<h3>{{prod.product_name}}</h3>
 					<p>{{prod.product_description}}</p>
 				</div>
 				<div class="price-and-close">
 					<button type="button" class="btn btn-primary">{{prod.product_price}}</button>
-					<span class="glyphicon glyphicon-remove-sign" id="remove_{{prod.id}}"></span>
+					<span class="glyphicon glyphicon-remove-sign" ng-click="removeItem(prod.id)" ></span>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 <script src="javascripts/products_angular_productListapp.js"></script>
-<script src="javascripts/products_angular.js"></script>
+
 </body>
 </html>
