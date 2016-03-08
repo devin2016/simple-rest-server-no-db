@@ -7,11 +7,12 @@ var controllers = {};
 		$http.get("/Products").then(function(response) 
 		{
 			$scope.ng_products = response.data;
-			document.getElementById("allProducts").style.display = "block";
+			document.body.style.display = "block";
 		});
 		
 		$scope.addItem = function(item)
 		{
+			if(item.product_name != "" && item.product_description != "" && item.product_price != "")
 			$http.post("/Products", item)
 				.success(function(response){
 					$scope.ng_products.push(response);
@@ -22,9 +23,13 @@ var controllers = {};
 		{
 			$http.delete("/Products/" + id)
 				.success(function(){
-					$scope.ng_products.splice(id-1, 1);
+					var filteredScope = $scope.ng_products.filter(function (element) { 
+						return element.id != id;
+					});
+					
+					$scope.ng_products = filteredScope;
 				});
-		}
+		};
 	};
 	
 	app.controller(controllers);

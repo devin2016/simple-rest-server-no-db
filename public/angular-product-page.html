@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ProductListApp">
 <head>
   <title>AngularJS Product Page</title>
   <meta charset="utf-8">
@@ -14,19 +14,19 @@
 	
 </head>
 <style>
-		.price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
-		.price-and-close span{padding-left: 100px;}
-		.container{margin: 0px 10px;width: 95%;}
-		body{ width: 1350px; overflow: auto;}
+	.price-and-close{float: right;padding-bottom: 0px;position: relative;bottom: 55px;right: 100px;}
+	.price-and-close span{padding-left: 100px;}
+	.container{margin: 0px 10px;width: 95%;}
+	body{ width: 1350px; overflow: auto;}
 </style>
-<body ng-app="ProductListApp" ng-controller="SimpleController" style="display:none;">
+<body ng-controller="SimpleController" style="display:none;">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Store</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="http://localhost:3000/angular-product-page.html">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Catalog</a></li>
       <li><a href="#">Contact</a></li>
